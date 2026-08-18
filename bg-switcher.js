@@ -199,9 +199,10 @@
            Style the step in index.html, where the breakpoint lives. */
 
         /* ==========================================
-           IOS-STYLE BLACK LIQUID GLASS NAV + LIVE RATE
+           NAV THEMES (DEFAULT + 4 UNIQUE LIVE CONCEPTS)
            ========================================== */
-        .amg-nav {
+        body:not([data-nav-theme]) .amg-nav,
+        body[data-nav-theme="default"] .amg-nav {
             padding: 16px 24px !important;
             position: fixed !important;
             top: 0 !important;
@@ -211,10 +212,12 @@
             pointer-events: none !important;
             transition: padding 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
-        .amg-nav.is-float {
+        body:not([data-nav-theme]) .amg-nav.is-float,
+        body[data-nav-theme="default"] .amg-nav.is-float {
             padding: 12px 24px !important;
         }
-        .amg-nav > nav {
+        body:not([data-nav-theme]) .amg-nav > nav,
+        body[data-nav-theme="default"] .amg-nav > nav {
             pointer-events: auto !important;
             max-width: 1200px !important;
             margin: 0 auto !important;
@@ -241,7 +244,8 @@
             isolation: isolate !important;
             transition: border-color .35s cubic-bezier(0.16,1,0.3,1), box-shadow .35s cubic-bezier(0.16,1,0.3,1) !important;
         }
-        .amg-nav > nav:hover {
+        body:not([data-nav-theme]) .amg-nav > nav:hover,
+        body[data-nav-theme="default"] .amg-nav > nav:hover {
             border-color: rgba(255,255,255,.28) !important;
             box-shadow: 0 22px 54px -18px rgba(0,0,0,.90),
                         0 4px 14px -7px rgba(0,0,0,.76),
@@ -249,20 +253,24 @@
                         inset 0 -1px 0 rgba(255,255,255,.09),
                         0 0 38px rgba(0,0,0,.44) !important;
         }
-        .amg-nav > nav::before,
-        .amg-nav > nav::after {
+        body:not([data-nav-theme]) .amg-nav > nav::before,
+        body:not([data-nav-theme]) .amg-nav > nav::after,
+        body[data-nav-theme="default"] .amg-nav > nav::before,
+        body[data-nav-theme="default"] .amg-nav > nav::after {
             content: '' !important;
             position: absolute !important;
             border-radius: inherit !important;
             pointer-events: none !important;
             display: block !important;
         }
-        .amg-nav > nav::before {
+        body:not([data-nav-theme]) .amg-nav > nav::before,
+        body[data-nav-theme="default"] .amg-nav > nav::before {
             inset: 1px !important;
             z-index: 0 !important;
             box-shadow: inset 1px 1px 0 rgba(255,255,255,.16), inset -1px -1px 0 rgba(255,255,255,.035) !important;
         }
-        .amg-nav > nav::after {
+        body:not([data-nav-theme]) .amg-nav > nav::after,
+        body[data-nav-theme="default"] .amg-nav > nav::after {
             inset: -55% -12% !important;
             z-index: 1 !important;
             background: linear-gradient(108deg, transparent 31%, rgba(255,255,255,.15) 43%, rgba(255,255,255,.025) 51%, transparent 63%) !important;
@@ -270,11 +278,312 @@
             opacity: .68 !important;
             transition: transform .7s cubic-bezier(0.16,1,0.3,1), opacity .3s ease !important;
         }
-        .amg-nav > nav:hover::after {
+        body:not([data-nav-theme]) .amg-nav > nav:hover::after,
+        body[data-nav-theme="default"] .amg-nav > nav:hover::after {
             transform: translateX(12%) !important;
             opacity: .92 !important;
         }
-        .amg-nav > nav > * { position: relative !important; z-index: 2 !important; }
+        body:not([data-nav-theme]) .amg-nav > nav > *,
+        body[data-nav-theme="default"] .amg-nav > nav > * { position: relative !important; z-index: 2 !important; }
+
+        /* CONCEPT 1: ARCHITECTURAL MINIMALIST DOCK */
+        body[data-nav-theme="dock"] .amg-nav {
+            padding: 16px 24px !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 60 !important;
+            pointer-events: none !important;
+            transition: padding 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav.is-float {
+            padding: 10px 24px !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav > nav {
+            pointer-events: auto !important;
+            max-width: 1200px !important;
+            margin: 0 auto !important;
+            border-radius: 12px !important;
+            background: rgba(14, 12, 10, 0.92) !important;
+            backdrop-filter: blur(24px) saturate(1.2) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.09) !important;
+            box-shadow: 0 18px 42px -12px rgba(0, 0, 0, 0.88), inset 0 1px 0 rgba(255, 255, 255, 0.12) !important;
+            padding: 10px 22px !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            position: relative !important;
+            overflow: visible !important;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav > nav::before,
+        body[data-nav-theme="dock"] .amg-nav > nav::after {
+            display: none !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav > nav:hover {
+            border-color: rgba(232, 101, 42, 0.4) !important;
+            box-shadow: 0 22px 50px -12px rgba(0, 0, 0, 0.94), 0 0 28px rgba(232, 101, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.18) !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a {
+            font-size: 11.5px !important;
+            letter-spacing: 0.12em !important;
+            text-transform: uppercase !important;
+            font-weight: 500 !important;
+            color: #B8AFA3 !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            transition: color 200ms ease !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a:hover {
+            color: #F5F1EA !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a [data-underline] {
+            display: none !important;
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a::before,
+        body[data-nav-theme="dock"] .amg-nav-center a::after {
+            content: '';
+            display: inline-block;
+            opacity: 0;
+            color: #E8652A;
+            transition: opacity 180ms ease, transform 180ms ease;
+            font-weight: 400;
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a::before {
+            content: '[';
+            margin-right: 4px;
+            transform: translateX(4px);
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a::after {
+            content: ']';
+            margin-left: 4px;
+            transform: translateX(-4px);
+        }
+        body[data-nav-theme="dock"] .amg-nav-center a:hover::before,
+        body[data-nav-theme="dock"] .amg-nav-center a:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        body[data-nav-theme="dock"] .amg-nav-cta {
+            border-radius: 8px !important;
+            background: linear-gradient(135deg, #E8652A, #C84E18) !important;
+            box-shadow: 0 4px 18px rgba(232, 101, 42, 0.4) !important;
+            border: 1px solid rgba(255, 255, 255, 0.18) !important;
+            font-weight: 600 !important;
+            letter-spacing: 0.05em !important;
+            text-transform: uppercase !important;
+            font-size: 11.5px !important;
+            padding: 8px 18px !important;
+        }
+
+        /* CONCEPT 2: SEGMENTED MODULAR PODS */
+        body[data-nav-theme="pods"] .amg-nav {
+            padding: 16px 24px !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 60 !important;
+            pointer-events: none !important;
+            transition: padding 0.3s cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav.is-float {
+            padding: 10px 24px !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav > nav {
+            pointer-events: auto !important;
+            background: transparent !important;
+            border: none !important;
+            box-shadow: none !important;
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            padding: 0 !important;
+            max-width: 1220px !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+            gap: 16px !important;
+            overflow: visible !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav > nav::before,
+        body[data-nav-theme="pods"] .amg-nav > nav::after {
+            display: none !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-left,
+        body[data-nav-theme="pods"] .amg-nav-center,
+        body[data-nav-theme="pods"] .amg-nav-right {
+            background: rgba(14, 12, 10, 0.92) !important;
+            border: 1px solid rgba(255, 255, 255, 0.09) !important;
+            border-radius: 12px !important;
+            backdrop-filter: blur(24px) saturate(1.2) !important;
+            -webkit-backdrop-filter: blur(24px) saturate(1.2) !important;
+            box-shadow: 0 14px 34px -10px rgba(0,0,0,0.85), inset 0 1px 0 rgba(255,255,255,0.12) !important;
+            transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-left {
+            padding: 6px 16px !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-center {
+            padding: 10px 24px !important;
+            gap: 28px !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-right {
+            padding: 6px 8px 6px 14px !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-left:hover,
+        body[data-nav-theme="pods"] .amg-nav-center:hover,
+        body[data-nav-theme="pods"] .amg-nav-right:hover {
+            border-color: rgba(232, 101, 42, 0.35) !important;
+            box-shadow: 0 18px 42px -10px rgba(0,0,0,0.92), 0 0 20px rgba(232, 101, 42, 0.07), inset 0 1px 0 rgba(255,255,255,0.18) !important;
+        }
+        body[data-nav-theme="pods"] .amg-nav-cta {
+            border-radius: 8px !important;
+        }
+
+        /* CONCEPT 3: DUAL-TIER CONCIERGE MASTHEAD */
+        body[data-nav-theme="masthead"] .amg-nav {
+            padding: 0 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 60 !important;
+            pointer-events: none !important;
+        }
+        body[data-nav-theme="masthead"] .amg-concierge-bar {
+            display: flex !important;
+            align-items: center;
+            justify-content: space-between;
+            padding: 7px 36px;
+            background: #080706;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            font-size: 10.5px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #8A8075;
+            transition: all 300ms cubic-bezier(0.22, 1, 0.36, 1);
+            pointer-events: auto;
+            max-height: 40px;
+        }
+        body[data-nav-theme="masthead"].is-float .amg-concierge-bar,
+        body[data-nav-theme="masthead"] .amg-nav.is-float .amg-concierge-bar {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+            overflow: hidden;
+            border-bottom-color: transparent;
+        }
+        body[data-nav-theme="masthead"] .amg-nav > nav {
+            pointer-events: auto !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            padding: 12px 36px !important;
+            background: rgba(10, 9, 8, 0.95) !important;
+            backdrop-filter: blur(20px) !important;
+            -webkit-backdrop-filter: blur(20px) !important;
+            border-bottom: 1px solid rgba(232, 101, 42, 0.22) !important;
+            border-left: none !important;
+            border-right: none !important;
+            border-top: none !important;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.88) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+        body[data-nav-theme="masthead"] .amg-nav > nav::before,
+        body[data-nav-theme="masthead"] .amg-nav > nav::after {
+            display: none !important;
+        }
+        body[data-nav-theme="masthead"] .amg-nav-center a {
+            display: inline-flex !important;
+            align-items: center !important;
+            font-size: 12px !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            color: #B8AFA3 !important;
+        }
+        body[data-nav-theme="masthead"] .amg-nav-center a:not(:last-child)::after {
+            content: '◆';
+            font-size: 5px;
+            color: #E8652A;
+            opacity: 0.6;
+            margin-left: 28px;
+            display: inline-block;
+            pointer-events: none;
+        }
+        body[data-nav-theme="masthead"] .amg-nav-cta {
+            border-radius: 4px !important;
+            border: 1px solid #E8652A !important;
+            background: rgba(232, 101, 42, 0.14) !important;
+            color: #F5F1EA !important;
+            box-shadow: 0 0 16px rgba(232, 101, 42, 0.2) !important;
+            text-transform: uppercase !important;
+            letter-spacing: 0.06em !important;
+            font-size: 11.5px !important;
+        }
+        body[data-nav-theme="masthead"] .amg-nav-cta:hover {
+            background: #E8652A !important;
+            color: #fff !important;
+            box-shadow: 0 0 24px rgba(232, 101, 42, 0.45) !important;
+        }
+
+        /* CONCEPT 4: ARCHITECTURAL RAZOR RIBBON */
+        body[data-nav-theme="razor"] .amg-nav {
+            padding: 0 !important;
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            z-index: 60 !important;
+            pointer-events: none !important;
+        }
+        body[data-nav-theme="razor"] .amg-nav > nav {
+            pointer-events: auto !important;
+            max-width: 100% !important;
+            border-radius: 0 !important;
+            margin: 0 !important;
+            padding: 14px 36px !important;
+            background: rgba(9, 8, 7, 0.96) !important;
+            backdrop-filter: blur(16px) !important;
+            -webkit-backdrop-filter: blur(16px) !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+            border-top: none !important;
+            border-left: none !important;
+            border-right: none !important;
+            box-shadow: 0 1px 0 0 rgba(232, 101, 42, 0.45), 0 16px 40px rgba(0,0,0,0.9) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: space-between !important;
+        }
+        body[data-nav-theme="razor"] .amg-nav > nav::before,
+        body[data-nav-theme="razor"] .amg-nav > nav::after {
+            display: none !important;
+        }
+        body[data-nav-theme="razor"] .amg-nav-center a {
+            font-size: 11.5px !important;
+            letter-spacing: 0.12em !important;
+            text-transform: uppercase !important;
+            font-weight: 500 !important;
+            color: #B8AFA3 !important;
+        }
+        body[data-nav-theme="razor"] .amg-nav-center a:hover {
+            color: #F5F1EA !important;
+        }
+        body[data-nav-theme="razor"] .amg-nav-cta {
+            border-radius: 0 !important;
+            border: 1px solid #E8652A !important;
+            background: #E8652A !important;
+            color: #fff !important;
+            text-transform: uppercase !important;
+            font-size: 11px !important;
+            letter-spacing: 0.08em !important;
+            box-shadow: 0 4px 16px rgba(232, 101, 42, 0.35) !important;
+        }
 
         @media (max-width: 1199px) {
             .amg-mobile-price-bar {
@@ -1562,8 +1871,7 @@
                     '</div>' +
                 '</div>' +
             '</div>' +
-            '<p class="amg-dial-hint"><span>Scroll to turn</span>' +
-            '<span class="amg-dial-sep"></span><span>or choose a family</span></p>';
+            '<p class="amg-dial-hint"><span>Choose a family</span></p>';
 
         const dial = document.getElementById('amg-dial');
         const ring = document.getElementById('amg-dial-ring');

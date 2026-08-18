@@ -9,8 +9,8 @@
   "theme_color": "#0C0A09",
   "icons": [
     {
-      "src": "/assets/favicon-refined.png",
-      "sizes": "192x192",
+      "src": "/assets/logo-ember-ligature.png",
+      "sizes": "1254x1254",
       "type": "image/png",
       "purpose": "any"
     }
