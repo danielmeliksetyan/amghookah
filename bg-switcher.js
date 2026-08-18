@@ -1241,30 +1241,8 @@
             border: 1px solid rgba(232, 101, 42, 0.2);
             border-radius: 14px;
             padding: 16px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
             position: relative;
-        }
-        .amg-flavor-chip-card:hover {
-            border-color: rgba(255, 120, 60, 0.6);
-            background: rgba(32, 28, 24, 0.85);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
-        }
-        .amg-flavor-chip-card.selected {
-            border-color: #FF783C !important;
-            background: rgba(232, 101, 42, 0.15) !important;
-            box-shadow: 0 0 18px rgba(232, 101, 42, 0.4);
-        }
-        .amg-flavor-chip-card.selected::after {
-            content: '✓ Selected';
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: #FF783C;
+            cursor: default;
         }
 
         /* ==========================================
@@ -1674,39 +1652,6 @@
         // function that no longer exists is a TypeError waiting for whoever
         // reuses one of those class names.
     }, true);
-
-    window.selectSpecificFlavorCard = function(cardEl, flavorName, familyKey, event) {
-        if (event) {
-            if (event.stopPropagation) event.stopPropagation();
-        }
-        
-        // Selecting a flavor is a content change only - the background is a
-        // fixed surface and no longer reacts to it.
-
-        // Toggle selected state
-        const allCards = cardEl.parentNode.querySelectorAll('.amg-flavor-chip-card');
-        allCards.forEach(c => {
-            if (c === cardEl) {
-                c.classList.toggle('selected');
-            } else {
-                c.classList.remove('selected');
-            }
-        });
-
-        // Update active taste focus banner
-        const focusBanner = document.getElementById('amg-taste-focus-banner');
-        const isSelected = cardEl.classList.contains('selected');
-        if (focusBanner) {
-            if (isSelected) {
-                focusBanner.style.display = 'flex';
-                focusBanner.style.opacity = '1';
-                document.getElementById('amg-focus-flavor-name').textContent = flavorName;
-                document.getElementById('amg-focus-flavor-tag').textContent = `SELECTED INGREDIENT ELEMENT: ${flavorName.toUpperCase()}`;
-            } else {
-                focusBanner.style.display = 'none';
-            }
-        }
-    };
 
     /* ==========================================================
        THE EMBER DIAL
@@ -2258,23 +2203,11 @@
                 <span data-motif style="font-family:var(--f-display, serif);font-weight:900;color:rgb(${theme.primary.join(',')});line-height:0.8;user-select:none;text-transform:uppercase;white-space:nowrap;display:inline-block;">${RING_LABEL[familyKey] || familyKey}</span>
             </div>
 
-            <!-- Dynamic Active Ingredient Banner -->
-            <div id="amg-taste-focus-banner" style="display:none;margin-bottom:24px;padding:14px 20px;background:rgba(${theme.primary.join(',')},0.18);border:1px solid rgb(${theme.primary.join(',')});border-radius:14px;align-items:center;justify-content:space-between;box-shadow:0 0 25px rgba(${theme.primary.join(',')},0.4);transition:all 0.4s ease;">
-                <div style="display:flex;align-items:center;gap:12px;">
-                    <span style="font-size:16px;">✦</span>
-                    <div>
-                        <span id="amg-focus-flavor-tag" style="font-size:10px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:rgb(${theme.accent.join(',')});">SELECTED INGREDIENT FOCUS</span>
-                        <h4 style="font-size:15px;font-weight:700;color:#F5F1EA;margin:2px 0 0 0;"><span id="amg-focus-flavor-name"></span> — Ingredient Active in Background Aura</h4>
-                    </div>
-                </div>
-                <span style="font-size:11px;font-weight:700;color:rgb(${theme.accent.join(',')});background:rgba(0,0,0,0.4);padding:4px 10px;border-radius:999px;">Canvas Atmosphere Synced ✓</span>
-            </div>
-
             <div style="position:relative;z-index:1">
-                <p style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#A09A92;margin:0 0 14px 0;">The six blends (tap to select)</p>
+                <p style="font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:#A09A92;margin:0 0 14px 0;">The six blends</p>
                 <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:12px;">
                     ${data.flavors.map(f => `
-                        <div class="amg-flavor-chip-card" onclick="window.selectSpecificFlavorCard(this, '${f.name.replace(/'/g, "\\'")}', '${familyKey}', event)">
+                        <div class="amg-flavor-chip-card">
                             <h4 style="font-size:14px;font-weight:700;color:#F5F1EA;margin:0 0 4px 0;">${f.name}</h4>
                             <p style="font-size:12px;color:#A09A92;margin:0;line-height:1.35;">${f.desc}</p>
                         </div>

@@ -158,7 +158,6 @@
        "from $X"                     index.html, rDeposit
        "Sat, December 5"             index.html, toLocaleDateString('en-US')
        "Family 03 / 10"              bg-switcher.js, the dial hub
-       "SELECTED INGREDIENT ..."     bg-switcher.js, selectSpecificFlavorCard
        "A, B, C" (flavor list)       bg-switcher.js, the attached-menu banner
   */
   var MONTHS = ['January','February','March','April','May','June','July',
@@ -628,7 +627,7 @@
 
      The menu is built from LANGS, not from AMG_LANGS, so every language stays
      listed and clickable before its dictionary exists. */
-  var DICT_SRC = { ru: 'i18n-ru.js?v=21', es: 'i18n-es.js?v=21' };
+  var DICT_SRC = { ru: 'i18n-ru.js?v=22', es: 'i18n-es.js?v=22' };
   var dictWaiters = {};
 
   function ensureDict(id, done) {

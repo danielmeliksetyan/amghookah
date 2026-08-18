@@ -366,11 +366,7 @@ window.AMG_LANGS.ru = {
     'Cooling': 'Охлаждение',
     'Aroma': 'Аромат',
     'Reserve this flavor menu': 'Забронировать это меню вкусов',
-    // The panel that appears once a single blend is tapped.
-    'SELECTED INGREDIENT FOCUS': 'ВЫБРАННЫЙ ИНГРЕДИЕНТ',
-    '— Ingredient Active in Background Aura': '— ингредиент активен в фоновой ауре',
-    'Canvas Atmosphere Synced ✓': 'Атмосфера синхронизирована ✓',
-    'The six blends (tap to select)': 'Шесть миксов (нажмите, чтобы выбрать)',
+    'The six blends': 'Шесть миксов',
     'SOMMELIER SIGNATURE SELECTION': 'ФИРМЕННЫЙ ВЫБОР СОМЕЛЬЕ',
     // Ring labels: one word each, because the ring seat is 112px wide.
     'Orchard': 'Сад', 'Floral': 'Цветы', 'Citrus': 'Цитрус', 'Mint': 'Мята',
