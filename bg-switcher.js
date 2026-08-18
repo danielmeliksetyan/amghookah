@@ -1254,6 +1254,38 @@
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.8), 0 0 25px rgba(232, 101, 42, 0.25) !important;
         }
 
+        /* Mobile/tablet performance profile. Live backdrop sampling is costly
+           while the document moves, so these widths keep the same dark glass
+           appearance with opaque surfaces and static accents. */
+        @media (max-width: 1199px), (hover: none) and (pointer: coarse) {
+            #amg-bg-static::after { display: none !important; }
+            .amg-card, .amg-figure, .amg-success, .amg-type, article.amg-card,
+            #amg-flavor-content {
+                background-color: rgba(24, 21, 18, 0.96) !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .amg-badge {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .amg-nav > nav, .amg-mobile-price-bar,
+            body:not([data-nav-theme]) .amg-nav.amg-luminous-edge > nav::before {
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+            }
+            .amg-mobile-price-bar {
+                background: rgba(18, 16, 14, 0.96) !important;
+            }
+            .amg-dial-aura, .amg-dial-seat, .amg-dial-glow {
+                filter: none !important;
+            }
+            .amg-dial-glow { animation: none !important; }
+            .amg-nav-cta, [data-navpill], .amg-panel-scrim {
+                will-change: auto !important;
+            }
+        }
+
     `;
     document.head.appendChild(styleTag);
 
