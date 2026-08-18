@@ -777,6 +777,48 @@ input,select,button,textarea{font:inherit;color:inherit}
   color:var(--ember-hi);background:rgba(18,16,14,0.72);border:1px solid rgba(232,101,42,0.42);
   padding:5px 13px;border-radius:var(--r-pill);backdrop-filter:blur(8px)}
 
+/* ------------------------------------------------ tablet horizontal rail ---
+   Keep the expanding desktop composition on landscape tablets and compact
+   laptops, but remove the two bitmap operations that make it expensive there:
+   resizing a filtered image and repainting an animated gradient. The panel is
+   still the thing that opens; its photograph simply rides inside it without an
+   additional zoom/filter transition, while a solid dimming layer fades off on
+   the compositor. The bottom-weighted gradient remains static so body copy keeps
+   the same contrast throughout the exchange. */
+@media (min-width:1101px) and (max-width:1366px),
+       (min-width:1101px) and (hover:none) and (pointer:coarse){
+  .amg-event-panel{contain:paint;
+    transition:flex-grow 360ms var(--ease),border-color 260ms var(--ease)}
+  .amg-event-rail[data-active="1"] > :nth-child(1),
+  .amg-event-rail[data-active="2"] > :nth-child(2),
+  .amg-event-rail[data-active="3"] > :nth-child(3),
+  .amg-event-rail[data-active="4"] > :nth-child(4){
+    transition:flex-grow 320ms cubic-bezier(.32,0,.14,1),border-color 240ms var(--ease)}
+
+  .amg-panel-img,
+  .amg-event-panel:hover .amg-panel-img,
+  .amg-event-rail[data-active="1"] > :nth-child(1) .amg-panel-img,
+  .amg-event-rail[data-active="2"] > :nth-child(2) .amg-panel-img,
+  .amg-event-rail[data-active="3"] > :nth-child(3) .amg-panel-img,
+  .amg-event-rail[data-active="4"] > :nth-child(4) .amg-panel-img{
+    transform:none !important;filter:none !important;transition:none !important}
+
+  .amg-panel-scrim,
+  .amg-event-rail[data-active="1"] > :nth-child(1) .amg-panel-scrim,
+  .amg-event-rail[data-active="2"] > :nth-child(2) .amg-panel-scrim,
+  .amg-event-rail[data-active="3"] > :nth-child(3) .amg-panel-scrim,
+  .amg-event-rail[data-active="4"] > :nth-child(4) .amg-panel-scrim{
+    opacity:1;background:linear-gradient(180deg,rgba(12,10,9,.04) 0%,rgba(12,10,9,.14) 30%,rgba(12,10,9,.74) 62%,rgba(12,10,9,.96) 100%);
+    transition:none}
+  .amg-panel-scrim::after{content:'';position:absolute;inset:0;
+    background:rgba(12,10,9,.40);opacity:1;
+    transition:opacity 320ms cubic-bezier(.22,1,.36,1)}
+  .amg-event-rail[data-active="1"] > :nth-child(1) .amg-panel-scrim::after,
+  .amg-event-rail[data-active="2"] > :nth-child(2) .amg-panel-scrim::after,
+  .amg-event-rail[data-active="3"] > :nth-child(3) .amg-panel-scrim::after,
+  .amg-event-rail[data-active="4"] > :nth-child(4) .amg-panel-scrim::after{opacity:0}
+}
+
 /* ---- below 1100px the rail becomes a stack ----
    A horizontal accordion cannot work on a phone: four spines plus an open panel
    need ~700px of width before the open one has room for a 2x2 spec grid. So the
