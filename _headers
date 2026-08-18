@@ -1,0 +1,84 @@
+# Netlify / Cloudflare Pages header rules.
+#
+# WHY THIS FILE EXISTS
+# The site is a bare static folder, so two of the audit's High findings cannot
+# be fixed in page code at all - they are response headers, and only the host
+# can send them. Keeping them here rather than in a hosting dashboard means the
+# configuration is version-controlled and survives a redeploy or a move.
+#
+# COMPRESSION IS NOT LISTED HERE ON PURPOSE.
+# Netlify and Cloudflare Pages both brotli-compress text automatically. That is
+# the single biggest performance win available (684 KB of text -> 182 KB), and
+# it needs no configuration. If this site is ever moved to a plain nginx or
+# Apache box, compression must be turned on explicitly there or that 502 KB
+# comes straight back.
+
+/*
+  # Clickjacking. The page has no legitimate reason to be framed.
+  X-Frame-Options: DENY
+  # MIME sniffing. Belt and braces alongside correct Content-Type.
+  X-Content-Type-Options: nosniff
+  # Do not leak full URLs (including any query) to third parties.
+  Referrer-Policy: strict-origin-when-cross-origin
+  # Nothing on this page uses these. Deny by default.
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+
+  # CONTENT SECURITY POLICY
+  #
+  # 'unsafe-inline' AND 'unsafe-eval' are both REQUIRED. Neither is an oversight
+  # and neither can be removed without changing how the page is built. This was
+  # tested, not assumed:
+  #
+  #   - 'unsafe-inline': the page is driven by several large inline <script>
+  #     blocks. Removing it means hashing or externalising every one of them.
+  #
+  #   - 'unsafe-eval': support.js:1904 evaluates the page's logic class as a
+  #     string. WITHOUT IT THE SITE SILENTLY HALF-WORKS - React still mounts and
+  #     the page still paints, but the runtime logs "logic class eval FAILED -
+  #     the template renders with props only" and every interactive control dies:
+  #     the reservation wizard cannot advance, the FAQ will not open, the event
+  #     panels will not switch. Verified by serving the page under this exact
+  #     policy; body text dropped from 7272 to 6228 characters.
+  #
+  # BE HONEST ABOUT WHAT THIS POLICY IS WORTH. With both 'unsafe-inline' and
+  # 'unsafe-eval' present, script-src provides little XSS protection - those two
+  # are most of what CSP normally takes away from an attacker. The real value
+  # here is the rest of it: frame-ancestors stops clickjacking, form-action stops
+  # a injected form posting elsewhere, object-src kills plugin vectors, base-uri
+  # stops <base> hijacking, and connect-src/img-src/font-src bound exfiltration
+  # to known hosts. That is worth having. It is not a substitute for the fact
+  # that the page has no reachable XSS sink today (audit 2.6).
+  #
+  # script-src does NOT list unpkg.com. React is vendored to /vendor/ (see the
+  # __resources map in index.html), so the site loads no third-party JavaScript.
+  # If that mapping is ever removed, unpkg.com has to come back here or React
+  # will be blocked and the page will never render.
+  #
+  # blob: is needed by the runtime, which builds stylesheets as blob URLs.
+  # style-src needs 'unsafe-inline' for the many inline style="" attributes and
+  # for the stylesheet bg-switcher.js injects at runtime.
+  # connect-src covers GA4; drop if unused.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'
+
+# Fingerprinted or effectively immutable assets. Images and vendored React only
+# change when their contents change, and both are referenced by exact filename.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/vendor/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# The HTML must never be cached hard - it is the file that points at everything
+# else, and a stale copy pins a visitor to old asset URLs.
+# must-revalidate lets the browser reuse it only after asking.
+/
+  Cache-Control: public, max-age=0, must-revalidate
+
+/index.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# The first-party scripts carry ?v= query strings in their tags, which is the
+# cache-buster, but the file paths themselves are stable - so revalidate rather
+# than cache them for a year under a version that may be bumped.
+/*.js
+  Cache-Control: public, max-age=0, must-revalidate
