@@ -771,41 +771,44 @@
             display: inline-flex !important;
             align-items: center !important;
             gap: 8px !important;
-            background: linear-gradient(135deg, #e8652a 0%, #ff783c 100%) !important;
-            color: #ffffff !important;
+            background: var(--ember) !important;
+            color: var(--ink) !important;
             font-family: var(--f-body) !important;
             font-size: 13.5px !important;
             font-weight: 600 !important;
             padding: 10px 22px !important;
             border-radius: 999px !important;
-            border: 1px solid rgba(255, 255, 255, 0.25) !important;
-            box-shadow: 0 4px 16px rgba(232, 101, 42, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.35) !important;
+            border: 1px solid var(--ember) !important;
+            box-shadow: 0 4px 22px rgba(232, 101, 42, 0.45) !important;
+            text-shadow: none !important;
             text-decoration: none !important;
             opacity: 1 !important;
             pointer-events: auto !important;
             scale: 1 !important;
             cursor: pointer !important;
-            will-change: transform, box-shadow, filter !important;
-            transition: transform 0.22s var(--ease), box-shadow 0.22s var(--ease), filter 0.22s var(--ease) !important;
+            will-change: scale, box-shadow !important;
+            transition: background 240ms var(--ease), border-color 240ms var(--ease), color 240ms var(--ease), box-shadow 240ms var(--ease), scale 260ms cubic-bezier(.34,1.56,.64,1) !important;
         }
         .amg-nav-cta:hover,
         [data-navpill]:hover {
-            transform: translateY(-1px) !important;
-            scale: 1 !important;
-            filter: brightness(1.08) !important;
-            box-shadow: 0 6px 24px rgba(232, 101, 42, 0.65), inset 0 1px 0 rgba(255, 255, 255, 0.45) !important;
+            background: var(--ember-hi) !important;
+            border-color: var(--ember-hi) !important;
+            color: var(--ink) !important;
+            scale: 1.055 !important;
+            filter: none !important;
+            box-shadow: var(--glow-ember) !important;
         }
         .amg-nav-cta:active,
         [data-navpill]:active {
-            transform: translateY(0) scale(0.98) !important;
+            scale: .97 !important;
         }
         .amg-nav-cta .amg-arrow,
         [data-navpill] .amg-arrow {
-            transition: transform 0.22s var(--ease) !important;
+            transition: translate 300ms var(--ease-out) !important;
         }
         .amg-nav-cta:hover .amg-arrow,
         [data-navpill]:hover .amg-arrow {
-            transform: translateX(3px) !important;
+            translate: 3px 0 !important;
         }
 
         /* Footer: Completely Seamless with Main Screen */
