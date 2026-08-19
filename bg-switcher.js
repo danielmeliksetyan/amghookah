@@ -587,21 +587,15 @@
 
         @media (max-width: 1199px) {
             .amg-mobile-price-bar {
+                border: 1px solid transparent !important;
                 border-radius: 999px !important;
-                background:
-                    radial-gradient(140% 190% at var(--glass-x, 18%) -85%, rgba(255,255,255,.32) 0%, rgba(255,255,255,.09) 35%, transparent 58%),
-                    linear-gradient(125deg, rgba(255,255,255,.09), rgba(255,255,255,.018) 46%, rgba(0,0,0,.18)),
-                    var(--liquid-glass) !important;
-                backdrop-filter: blur(var(--liquid-glass-blur)) saturate(1.65) contrast(1.04) !important;
-                -webkit-backdrop-filter: blur(var(--liquid-glass-blur)) saturate(1.65) contrast(1.04) !important;
-                border: 1px solid var(--liquid-glass-edge) !important;
-                box-shadow: 0 18px 46px -18px rgba(0,0,0,.86),
-                            0 4px 12px -7px rgba(0,0,0,.70),
-                            inset 0 1px 0 rgba(255,255,255,.42),
-                            inset 0 -1px 0 rgba(255,255,255,.07),
-                            0 0 28px rgba(0,0,0,.34) !important;
+                background: transparent !important;
+                backdrop-filter: none !important;
+                -webkit-backdrop-filter: none !important;
+                box-shadow: none !important;
                 position: fixed !important;
-                overflow: hidden !important;
+                overflow: visible !important;
+                isolation: isolate !important;
             }
             .amg-mobile-price-bar::before,
             .amg-mobile-price-bar::after {
@@ -611,16 +605,26 @@
                 pointer-events: none !important;
             }
             .amg-mobile-price-bar::before {
-                inset: 1px !important;
+                inset: 0 !important;
                 z-index: 0 !important;
-                box-shadow: inset 1px 1px 0 rgba(255,255,255,.16), inset -1px -1px 0 rgba(255,255,255,.035) !important;
+                border: 1px solid transparent !important;
+                background:
+                    linear-gradient(112deg, rgba(21,19,17,.985), rgba(13,12,11,.975)) padding-box,
+                    linear-gradient(102deg, rgba(245,241,234,.14), rgba(245,241,234,.07) 32%, rgba(232,101,42,.82) 68%, rgba(245,241,234,.10)) border-box !important;
+                backdrop-filter: blur(14px) saturate(1.08) !important;
+                -webkit-backdrop-filter: blur(14px) saturate(1.08) !important;
+                box-shadow:
+                    0 20px 48px -25px rgba(0,0,0,.96),
+                    0 0 30px rgba(232,101,42,.08),
+                    inset 0 1px 0 rgba(255,255,255,.055),
+                    inset -1px -1px 0 rgba(0,0,0,.24) !important;
             }
             .amg-mobile-price-bar::after {
-                inset: -45% -15% !important;
+                inset: auto 14% -1px !important;
+                height: 1px !important;
                 z-index: 1 !important;
-                background: linear-gradient(108deg, transparent 31%, rgba(255,255,255,.13) 43%, rgba(255,255,255,.025) 51%, transparent 63%) !important;
-                transform: translateX(-18%) !important;
-                opacity: .72 !important;
+                background: linear-gradient(90deg, transparent, rgba(232,101,42,.92), transparent) !important;
+                box-shadow: 0 0 10px rgba(232,101,42,.58) !important;
             }
             .amg-mobile-price-bar > * { position: relative !important; z-index: 2 !important; }
         }
@@ -1275,7 +1279,7 @@
                 -webkit-backdrop-filter: none !important;
             }
             .amg-mobile-price-bar {
-                background: rgba(18, 16, 14, 0.96) !important;
+                background: transparent !important;
             }
             .amg-dial-aura, .amg-dial-seat, .amg-dial-glow {
                 filter: none !important;
