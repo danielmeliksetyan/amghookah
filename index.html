@@ -152,7 +152,7 @@ body{margin:0}
    switcher redefines --ink to rgba(18,16,14,0.78) for its glass surfaces, and
    that translucency leaked straight into the curtain - which is why the hero
    photo was showing through the intro as a faded main page. */
-#amg-curtain{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;pointer-events:none;contain:strict;
+#amg-curtain{position:fixed;top:0;left:0;width:100%;height:100vh;height:100svh;z-index:9999;display:grid;place-items:center;pointer-events:none;contain:strict;
   background:
     radial-gradient(1200px 820px at 68% 12%, rgba(232,101,42,0.13), rgba(232,101,42,0) 62%),
     radial-gradient(900px 700px at 12% 82%, rgba(160,50,18,0.10), rgba(160,50,18,0) 66%),
@@ -171,15 +171,15 @@ body{margin:0}
 /* The 1254px Ember Ligature is the single production mark for the intro, nav,
    drawer, favicon and section seals. Live wordmark copy stays in DM Serif
    Display / DM Sans rather than baking a second type system into the image. */
-.amg-intro-brand{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;animation:amg-velvet-illuminate 1200ms cubic-bezier(0.16,1,0.3,1) both}
-.amg-intro-glyph{width:clamp(74px,15vw,110px);height:clamp(74px,15vw,110px);object-fit:contain;filter:drop-shadow(0 0 36px rgba(232,101,42,0.55));margin-bottom:20px}
-.amg-intro-title{font-family:var(--f-display);font-size:clamp(22px,4.5vw,34px);font-weight:400;letter-spacing:0.24em;color:var(--bone);text-shadow:0 2px 18px rgba(0,0,0,0.9),0 0 28px rgba(232,101,42,0.3);margin-bottom:8px}
-.amg-intro-sub{font-family:var(--f-body);font-size:clamp(10px,1.8vw,12.5px);font-weight:600;letter-spacing:0.42em;color:var(--smoke);opacity:0.85}
+.amg-intro-brand{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transform:none;filter:none;animation:amg-velvet-illuminate 1200ms cubic-bezier(0.16,1,0.3,1) both}
+.amg-intro-glyph{display:block;width:clamp(74px,15vw,110px);height:clamp(74px,15vw,110px);object-fit:contain;filter:drop-shadow(0 0 36px rgba(232,101,42,0.55));margin-bottom:20px}
+.amg-intro-title{font-family:var(--f-display);font-size:clamp(22px,4.5vw,34px);font-weight:400;line-height:1;letter-spacing:0.24em;color:var(--bone);text-shadow:0 2px 18px rgba(0,0,0,0.9),0 0 28px rgba(232,101,42,0.3);margin-bottom:8px}
+.amg-intro-sub{font-family:var(--f-body);font-size:clamp(10px,1.8vw,12.5px);font-weight:600;line-height:1;letter-spacing:0.42em;color:var(--smoke);opacity:0.85}
 
 @keyframes amg-velvet-illuminate{
-  0%   {opacity:0;filter:blur(8px)}
-  50%  {opacity:1;filter:blur(0)}
-  100% {opacity:1;filter:blur(0)}
+  0%   {opacity:0}
+  50%  {opacity:1}
+  100% {opacity:1}
 }
 
 
