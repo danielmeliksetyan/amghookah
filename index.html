@@ -4287,7 +4287,7 @@ body:not([data-nav-theme]) .amg-nav.amg-luminous-edge.is-float > nav:hover::afte
       </div>
 
       <!-- Calculation Result & Contact Actions Rail -->
-      <aside class="amg-rail">
+      <aside class="amg-rail" data-rate-summary>
         <p class="amg-eyebrow amg-label" style="font-size:11px;text-transform:uppercase;color:var(--smoke-dim);margin:0">Estimated Rate</p>
         <h3 class="amg-rail-h" style="font-size:36px;color:var(--ember-hi);margin:6px 0 0">{{ calcTotal }}</h3>
         <p style="font-size:13px;color:var(--smoke-dim);margin:2px 0 18px">Approximate estimate based on selection</p>
@@ -4473,12 +4473,13 @@ class Component extends DCLogic {
 
     let heroGone = false;
     let reserveInView = false;
+    let rateSummaryInView = false;
     let footerInView = false;
 
     const updateMobilePriceBar = () => {
       const mpb = document.querySelector('.amg-mobile-price-bar');
       if (!mpb) return;
-      mpb.classList.toggle('is-visible', reserveInView && !footerInView);
+      mpb.classList.toggle('is-visible', reserveInView && !rateSummaryInView && !footerInView);
     };
 
     const setDrawer = (open) => {
@@ -4676,6 +4677,19 @@ class Component extends DCLogic {
         {threshold: 0, rootMargin: '-60px 0px -60px 0px'}
       );
       this._reserveIO.observe(reserveSec);
+    }
+
+    /* Hand the price display from the floating mobile pill to the complete
+       inline summary. The reduced bottom edge matches the space occupied by
+       the pill, so it stands down just as the summary becomes readable above
+       it rather than briefly covering the duplicate total. */
+    const rateSummary = document.querySelector('[data-rate-summary]');
+    if (rateSummary && 'IntersectionObserver' in window){
+      this._rateSummaryIO = new IntersectionObserver(
+        ([e]) => { rateSummaryInView = e.isIntersecting; updateMobilePriceBar(); },
+        {threshold: 0, rootMargin: '0px 0px -88px 0px'}
+      );
+      this._rateSummaryIO.observe(rateSummary);
     }
 
     const footer = document.querySelector('.amg-footer');
@@ -5122,6 +5136,7 @@ class Component extends DCLogic {
     if (this._io) { this._io.disconnect(); this._io = null; }
     if (this._ctaIO) { this._ctaIO.disconnect(); this._ctaIO = null; }
     if (this._reserveIO) { this._reserveIO.disconnect(); this._reserveIO = null; }
+    if (this._rateSummaryIO) { this._rateSummaryIO.disconnect(); this._rateSummaryIO = null; }
     if (this._footerIO) { this._footerIO.disconnect(); this._footerIO = null; }
     if (this._killIntro) { this._killIntro(); this._killIntro = null; }
     this._setDrawer = null;
